@@ -7,7 +7,7 @@ export function UserContextProvider({children}){
     const [ready,setReady]= useState(false);  
     const [fetchAgain, setFetchAgain]= useState(true);  
     const getUser =async () =>{
-        const {data}=await axios.get('http://localhost:4000/profile')
+        const {data}=await axios.get('/profile')
         if(data)
         {
             setUser(data);

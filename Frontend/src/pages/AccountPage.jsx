@@ -19,7 +19,7 @@ export default function AccountPage(){
         return <Navigate to={'/login'}/>;
     }
     async function logout(){
-        await axios.post('http://localhost:4000/logout')
+        await axios.post('/logout')
         setRedirect(true);
         setUser(null);
     }
@@ -49,8 +49,15 @@ export default function AccountPage(){
             </nav>
             {subpages==='profile' && 
                 <div className="text-center max-w-lg mx-auto">
-                    Logged in as {user.name} ({user.email})
                     <br />
+                    <div className="flex flex-col w-80">
+                    <p className="flex justify-between">
+                        Name: <span>{user.name} </span>
+                    </p> 
+                    <p className="flex justify-between">
+                        Email:<span>({user.email})</span>
+                    </p>
+                    </div>
                     <button onClick={logout}  className="bg-primary text-white w-full mx-auto rounded-xl px-4 mt-4 py-1">Logout</button>
                 </div>
             }

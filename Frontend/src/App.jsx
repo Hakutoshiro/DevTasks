@@ -6,20 +6,23 @@ import RegisterPage from './pages/RegisterPage'
 import axios from 'axios'
 import { UserContextProvider } from './UserContext'
 import AccountPage from './pages/AccountPage'
-axios.defaults.withCredentials=true
+import Temp from './Temp'
 
+axios.defaults.withCredentials=true
+axios.defaults.baseURL=process.env.BACKEND_URL
 
 export default function App(){
   return (
-    <UserContextProvider>
-      <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route index element={<IndexPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/register' element={<RegisterPage />} />
-          <Route path='/account/:subpages?' element={<AccountPage />} />
-        </Route>
-      </Routes>
-    </UserContextProvider>
+    <Temp/>
+    // <UserContextProvider>
+    //   <Routes>
+    //     <Route path='/' element={<Layout />}>
+    //       <Route index element={<IndexPage />} />
+    //       <Route path='/login' element={<LoginPage />} />
+    //       <Route path='/register' element={<RegisterPage />} />
+    //       <Route path='/account/:subpages?' element={<AccountPage />} />
+    //     </Route>
+    //   </Routes>
+    // </UserContextProvider>
   )
 }
