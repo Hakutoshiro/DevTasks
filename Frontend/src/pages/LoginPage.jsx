@@ -15,7 +15,7 @@ export default function LoginPage(){
     {
         ev.preventDefault();
         try {
-            const {data} =await axios.post('http://localhost:4000/login',{email, password})
+            const {data} =await axios.post('/login',{email, password})
             alert('Login successful')
             setUser(data)
             setReady(true);

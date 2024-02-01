@@ -26,12 +26,11 @@ export default function IndexPage() {
             alert('Please enter Title and Due Date');
             return;
         } else {
-            console.log('hit');
-            const userDoc = await axios.post('https://xg3pk363duf2itnolsgahjhr4m0ylukb.lambda-url.ap-south-1.on.aws/', {
-                
+            const userDoc = await axios.post('/addtask', {
+                userId : user._id,
                 title: title,
                 description: description,
-                
+                date: date,
             })
             console.log(userDoc);
             setTitle('');
@@ -42,11 +41,11 @@ export default function IndexPage() {
         }
     }
     const getTasks = async () => {
-        
-            const { data } = await axios.get('http://localhost:4000/dataretreival')
+        if(user){
+            const { data } = await axios.get('/dataretreival')
             const tmp = data;
             setTasks(tmp);
-        
+        }
     }
 
     return (
@@ -81,8 +80,8 @@ export default function IndexPage() {
                 </div>
             )}
 
-            <div className="flex flex-wrap flex-col border border-black items-center max-w-3xl rounded-3xl pb-4" >
-                <h1 className="text-5xl pb-2">To Do</h1>
+            <div className="flex flex-wrap flex-col border border-black items-center max-w-3xl rounded-3xl " >
+                <h1 className="text-5xl pt-2">To Do</h1>
                 <div className="flex gap-9 flex-wrap m-3 ">
                     {
                         Tasks?.map((task,index) => {
@@ -92,7 +91,7 @@ export default function IndexPage() {
                     }
                 </div>
             </div>
-            <div className="flex flex-wrap mt-8 border border-black flex-col items-center rounded-3xl pb-4" >
+            <div className="flex flex-wrap mt-8 border border-black flex-col items-center rounded-3xl pb-2" >
             <h1 className="text-5xl py-2">Done</h1>
                 <div className="flex gap-10 flex-wrap mx-auto ">
                     {

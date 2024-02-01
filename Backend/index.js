@@ -16,17 +16,15 @@ const aws_region = process.env.region;
 const empTable = process.env.tableName;
 
 AWS.config.update({
-    accessKeyId: my_AWSAccessKeyId,
-    secretAccessKey: my_AWSSecretKey,
-    region: aws_region,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey:process.env.AWS_SECRET_ACCESS_KEY,
+    region: process.env.AWS_REGION,
   });
   
-const dynamodb = new AWS.DynamoDB();
 const docClient = new AWS.DynamoDB.DocumentClient();
-const taskid="task_"+Math.random()
 
 
-mongoose.connect(process.env.Mongo_URL)
+mongoose.connect(process.env.Mongo_URI)
 
 app.use(cookieParser())
 app.use(express.json())
@@ -36,12 +34,9 @@ app.use(cors({
     }
 ))
 
-app.get('/test', (req, res) => {
-    res.json('hello!')
-})
 
 const bcryptSalt = bcrypt.genSaltSync(10);
-const jwtSecret= 'asdlfjdfjasdfjdsafjsdlaf'
+const jwtSecret= process.env.JWT_SECRET;
 
 app.post('/register',async (req, res) => {
     const {name,email,password} = req.body;
@@ -100,14 +95,21 @@ app.post('/logout',(req, res)=>{
 })
 
 app.post('/addtask',async (req,res)=>{
-    const {userID,title,description,date} = req.body;
-    const result =await axios.post('    ',{userID,title,description,date})
-    console.log(result)
+    const {title,description,date} = req.body;
+    const {token} = req.cookies
+    let UserID ='';
+    if(token){
+        jwt.verify(token,jwtSecret,{},async (err,data) =>{
+            if(err)throw err;
+            UserID=data.id;
+        })
+    console.log({title,description,date})
+    }
     try {
         const params = {
             TableName: 'Tasks',
             Item: {
-                'UserID': userID,
+                'UserID': UserID,
                 'TaskID ' : "TaskID_"+Math.random(),
                 'title': title,
                 'description': description,
@@ -123,7 +125,6 @@ app.post('/addtask',async (req,res)=>{
     } catch (error) {
         res.status(422).json('err')
     }
-
 })
 
 app.get('/dataretreival',async (req,res)=>{
@@ -241,4 +242,4 @@ app.post('/updatetask',async (req, res)=>{
     
 })
 
-app.listen(4000)
+app.listen(process.env.PORT)

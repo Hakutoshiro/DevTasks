@@ -7,6 +7,7 @@ import axios from 'axios'
 import { UserContextProvider } from './UserContext'
 import AccountPage from './pages/AccountPage'
 axios.defaults.withCredentials=true
+axios.defaults.baseURL=process.env.BACKEND_URL
 
 
 export default function App(){

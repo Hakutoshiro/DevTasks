@@ -23,7 +23,7 @@ export default function EditModal({task,tasks,setTasks}) {
     const handleUpdate = async (ev)=>{
         ev.preventDefault();
         try {
-            const response= await axios.post('http://localhost:4000/updatetask',{
+            const response= await axios.post('/updatetask',{
                 task:task,
                 title:title,
                 description:description,

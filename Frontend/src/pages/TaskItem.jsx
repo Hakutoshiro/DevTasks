@@ -10,7 +10,7 @@ export default function TaskItem({ task, tasks, setTasks }) {
     const { fetchAgain, setFetchAgain } = useContext(UserContext)
 
     const handleDoneBtn = async (task) => {
-        await axios.post('http://localhost:4000/taskdone', {
+        await axios.post('/taskdone', {
             task: task
         })
         setTasks([])
@@ -18,7 +18,7 @@ export default function TaskItem({ task, tasks, setTasks }) {
     }
 
     const handleDeleteBtn = async (task) => {
-        await axios.post('http://localhost:4000/taskdelete', {
+        await axios.post('/taskdelete', {
             task: task
         })
         setFetchAgain(!fetchAgain);
