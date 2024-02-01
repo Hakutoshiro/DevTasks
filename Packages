@@ -1,0 +1,12 @@
+backend:
+express
+mongoose
+cors
+jsonwebtoken
+bcrypt  
+dotenv
+
+frontend:
+tailwind
+axios
+react-router-dom
