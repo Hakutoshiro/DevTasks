@@ -48,7 +48,7 @@ Create a `.env` file in the Backend directory and add the following variables:
   
 #Start the Backend
  cd ../Backend
- npm run dev
+ npm run devStart
 ```
 
 ## Additional Information:
