@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app =express();
@@ -7,7 +8,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const AWS = require('aws-sdk')
-require('dotenv').config();
 
 const my_AWSAccessKeyId = process.env.AWS_ACCESS_KEY_ID;
 const my_AWSSecretKey = process.env.AWS_SECRET_ACCESS_KEY;
@@ -241,4 +241,4 @@ app.post('/updatetask',async (req, res)=>{
     
 })
 
-app.listen(process.env.PORT)
+app.listen(process.env.PORT || 4000)
