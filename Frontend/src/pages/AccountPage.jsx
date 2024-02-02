@@ -55,7 +55,7 @@ export default function AccountPage(){
                         Name: <span>{user.name} </span>
                     </p> 
                     <p className="flex justify-between">
-                        Email:<span>({user.email})</span>
+                        Email:<span>{user.email}</span>
                     </p>
                     </div>
                     <button onClick={logout}  className="bg-primary text-white w-full mx-auto rounded-xl px-4 mt-4 py-1">Logout</button>

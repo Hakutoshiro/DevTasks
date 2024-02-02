@@ -22,9 +22,17 @@ export default function IndexPage() {
     }, [user, fetchAgain])
 
     const handleSubmitBtn = async () => {
+        let date1 = new Date(date);
+        let date2 = new Date();
         if (!title || !date) {
             alert('Please enter Title and Due Date');
+        
             return;
+        }
+        else if(date1<date2){
+            alert('Please enter a valid date');
+            return;
+        
         } else {
             const userDoc = await axios.post('/addtask', {
                 userId : user._id,
@@ -41,11 +49,11 @@ export default function IndexPage() {
         }
     }
     const getTasks = async () => {
-        if(user){
+        
             const { data } = await axios.get('/dataretreival')
             const tmp = data;
             setTasks(tmp);
-        }
+        
     }
 
     return (
@@ -80,9 +88,9 @@ export default function IndexPage() {
                 </div>
             )}
 
-            <div className="flex flex-wrap flex-col border border-black items-center max-w-3xl rounded-3xl " >
-                <h1 className="text-5xl pt-2">To Do</h1>
-                <div className="flex gap-9 flex-wrap m-3 ">
+            <div className="flex flex-wrap flex-col border border-black items-center max-w-3xl rounded-3xl pb-4" >
+                <h1 className="text-5xl py-2">To Do</h1>
+                <div className="flex gap-9 flex-wrap justify-center ">
                     {
                         Tasks?.map((task,index) => {
                             if(!task.status)
@@ -91,9 +99,9 @@ export default function IndexPage() {
                     }
                 </div>
             </div>
-            <div className="flex flex-wrap mt-8 border border-black flex-col items-center rounded-3xl pb-2" >
+            <div className="flex flex-wrap mt-8 border border-black flex-col items-center rounded-3xl pb-4" >
             <h1 className="text-5xl py-2">Done</h1>
-                <div className="flex gap-10 flex-wrap mx-auto ">
+                <div className="flex gap-9 flex-wrap justify-center ">
                     {
                         Tasks?.map((task,index) => {
                             if(task.status)

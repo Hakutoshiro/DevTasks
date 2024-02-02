@@ -30,7 +30,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(cors({
         credentials:true,
-        origin:'*',
+        origin:'http://localhost:5173',
     }
 ))
 
