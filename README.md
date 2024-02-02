@@ -13,7 +13,7 @@ This setup provides the **task management application** while integrating variou
 ```
 ## Set up Environment variables:
 
-Create a `.env` file in the root directory and add the following variables:
+Create a `.env` file in the Backend directory and add the following variables:
 ```shell 
  #Server Config
  PORT=4000
