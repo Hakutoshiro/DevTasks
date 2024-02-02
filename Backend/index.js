@@ -7,18 +7,17 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const AWS = require('aws-sdk')
-const axios = require('axios');
 require('dotenv').config();
 
-const my_AWSAccessKeyId = process.env.AWSAccessKeyId;
-const my_AWSSecretKey = process.env.AWSSecretKey;
-const aws_region = process.env.region;
-const empTable = process.env.tableName;
+const my_AWSAccessKeyId = process.env.AWS_ACCESS_KEY_ID;
+const my_AWSSecretKey = process.env.AWS_SECRET_ACCESS_KEY;
+const aws_region = process.env.AWS_REGION;
+
 
 AWS.config.update({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey:process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION,
+    accessKeyId:  my_AWSAccessKeyId ,
+    secretAccessKey:my_AWSSecretKey,
+    region: aws_region,
   });
   
 const docClient = new AWS.DynamoDB.DocumentClient();
@@ -30,7 +29,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(cors({
         credentials:true,
-        origin:'*',
+        origin:'http://localhost:5173',
     }
 ))
 
